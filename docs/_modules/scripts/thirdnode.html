@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scripts.thirdnode &mdash; rt2_first 1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            rt2_first
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">rt2_first</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">scripts.thirdnode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for scripts.thirdnode</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># importing some libraries</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module: secondnode</span>
+<span class="sd">   :platform: unix</span>
+<span class="sd">   :synopsis: Python module for extracting the velocity and position</span>
+
+<span class="sd">.. moduleauthor:: Ehsan Fatemi</span>
+
+<span class="sd">This node is to track the number of times a </span>
+<span class="sd">robot reaches a goal and </span>
+<span class="sd">the number of times a goal is canceled.</span>
+
+<span class="sd">Subscribes to:</span>
+<span class="sd">   /reaching_goal/result</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">std_srvs.srv</span> <span class="kn">import</span> <span class="n">Empty</span><span class="p">,</span><span class="n">EmptyResponse</span>
+<span class="kn">import</span> <span class="nn">assignment_2_2022.msg</span>
+
+<span class="kn">import</span> <span class="nn">rospy</span>
+
+<span class="n">reaching_times</span> <span class="o">=</span><span class="mi">0</span>
+<span class="n">cancelation_times</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1">#this function is called if the service is called</span>
+<span class="c1">#it prints the current values of &quot;cancelation_times&quot; and &quot;reaching_times&quot; and sends an empty response.</span>
+
+<div class="viewcode-block" id="cl_bck"><a class="viewcode-back" href="../../index.html#scripts.thirdnode.cl_bck">[docs]</a><span class="k">def</span> <span class="nf">cl_bck</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function is called when the service </span>
+<span class="sd">    *&quot;reach_cancel_ints&quot;* is called. It prints the </span>
+<span class="sd">    current values of the global variables </span>
+<span class="sd">    *cancelation_times* and *reaching_times* and returns </span>
+<span class="sd">    an empty response.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">       req (msg):  a request message of type *Empty*.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">cancelation_times</span><span class="p">,</span><span class="n">reaching_times</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Canceled Objective&#39;s times </span><span class="si">{</span><span class="n">cancelation_times</span><span class="si">}</span><span class="s2"> , Reached Objective&#39;s times: </span><span class="si">{</span><span class="n">reaching_times</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">EmptyResponse</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="cl_bck_sub"><a class="viewcode-back" href="../../index.html#scripts.thirdnode.cl_bck_sub">[docs]</a><span class="k">def</span> <span class="nf">cl_bck_sub</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function checks the status field of the message to </span>
+<span class="sd">    determine whether the goal was reached or canceled. </span>
+<span class="sd">    If the goal was canceled, it increments the </span>
+<span class="sd">    *cancelation_times* counter. If the goal was reached, </span>
+<span class="sd">    it increments the *reaching_times* counter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data : a message of type *assignment_2_2022.msg.PlanningActionResult*</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+
+        <span class="k">global</span> <span class="n">cancelation_times</span>
+        <span class="n">cancelation_times</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">elif</span> <span class="n">data</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+
+        <span class="k">global</span> <span class="n">reaching_times</span>
+        <span class="n">reaching_times</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<span class="c1">#This code is the main function of the ROS node</span>
+<span class="c1">#It specifies that when a message is received, the function cl_bck_sub should be called to handle the message</span>
+<span class="c1">#it calls rospy.spin() which keeps the node running and listening for new messages or service calls</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+  
+    <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s2">&quot;You have started the Code&quot;</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;reach_cancel_node&#39;</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&quot;/reaching_goal/result&quot;</span><span class="p">,</span> <span class="n">assignment_2_2022</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">PlanningActionResult</span><span class="p">,</span> <span class="n">cl_bck_sub</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span><span class="s1">&#39;reach_cancel_ints&#39;</span><span class="p">,</span> <span class="n">Empty</span><span class="p">,</span> <span class="n">cl_bck</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Ehsan Fatemi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
