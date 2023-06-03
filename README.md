@@ -1,4 +1,45 @@
 # RT2 Assignment
+# docs
+# Second
+## Robot Goal Planning and Visualization
+This directory contains code to satisfy some features such as
+-  Some buttons for handling the motion of the robot
+-  A plot with the robot’s position and targets’ positions
+-  A text box with the distance of the closest obstacle
+-  A plot for the number of reached/not-reached targets
+
+The system allows users Jupyter Notebook to input goal positions, send goals to the robot, visualize the robot's goals on a scatter plot, monitor the closest obstacle distance detected by the robot and plot the numer of reached or canceled obstacles.
+
+## Prerequisites
+
+- ROS 
+- Python 3
+- IPython Widgets
+- matplotlib
+- actionlib
+- assignment_2_2022 package
+- sensor_msgs package
+- nav_msgs package
+- std_srvs package
+
+## Usage
+
+1. Clone the repository and navigate to the project directory.
+     https://github.com/CarmineD8/assignment_2_2022 
+3. Launch the ROS environment.
+4. Launch the Jupyter Notebook.
+     ``` jupyter notebook```
+6. Run the following command to execute the goal planning and visualization system:
+     ```roslaunch assignment_2_2022 assignment1.launch ```
+6. Use the input fields to enter the X and Y positions for the robot's goal.
+7. Click the "Send Goal" button to send the goal to the robot.
+8. Click the "Cancel Goal" button to cancel the active goal.
+9. The scatter plot will display the robot's goal positions in real-time.
+10. The "Closest Obstacle Distance" value will be updated based on the laser scan data received by the robot.
+11. The numer of reached or canceled target will be ploted on the screen.
+
+
+
 # Third
 ## Statistical Analysis Report
 
