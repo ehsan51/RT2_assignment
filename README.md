@@ -7,7 +7,7 @@ The directory contains information and documentation related to the Research Tra
 
 The address is: [https://ehsan51.github.io/RT2_assignment/](https://ehsan51.github.io/RT2_assignment/)
 
-The environment of this address is as follows:
+The environment of this address is as following:
 
 ![image](https://github.com/ehsan51/RT2_assignment/assets/52650110/ae122c91-e37c-4e33-9063-df2792e08808)
 
@@ -59,7 +59,7 @@ This directory contains code to satisfy some features such as
 -  A text box with the distance of the closest obstacle
 -  A plot for the number of reached/not-reached targets
 
-The system allows users Jupyter Notebook to input goal positions, send goals to the robot, visualize the robot's goals on a scatter plot, monitor the closest obstacle distance detected by the robot and plot the numer of reached or canceled obstacles.
+The system allows users in Jupyter Notebook to input goal positions, send goals to the robot, visualize the robot's targrt on a plot and the robot position, monitor the closest obstacle distance detected by the robot and plot the numer of reached/not-reached targets.
 
 ### Prerequisites
 
@@ -80,17 +80,39 @@ The system allows users Jupyter Notebook to input goal positions, send goals to 
 3. Launch the ROS environment.
 4. Launch the Jupyter Notebook.
      ``` jupyter notebook```
-6. Run the following command to execute the goal planning and visualization system:
+5. Run the following command to execute the goal planning and visualization system:
      ```roslaunch assignment_2_2022 assignment1.launch ```
 6. Use the input fields to enter the X and Y positions for the robot's goal.
 7. Click the "Send Goal" button to send the goal to the robot.
 8. Click the "Cancel Goal" button to cancel the active goal.
-9. The scatter plot will display the robot's goal positions in real-time.
-10. The "Closest Obstacle Distance" value will be updated based on the laser scan data received by the robot.
-11. The numer of reached or canceled target will be ploted on the screen.
+9. The plot will display the robot's positions in real-time
+10. The plot will display the robot's goal positions in real-time.
+11. The "Closest Obstacle Distance" value will be updated based on the laser scan data received by the robot.
+12. The numer of reached or canceled target will be ploted on the screen.
 
+Here is the environment
+<br> <!--  -->
+ 1- Gazebo
+ 
+![image](https://github.com/ehsan51/RT2_assignment/assets/52650110/bef36a36-0347-48c8-8f69-d267caf45c83)
 
+2-  Some buttons for handling the motion of the robot: 
+<br> <!-- Some buttons for handling the motion of the robot -->
+![image](https://github.com/ehsan51/RT2_assignment/assets/52650110/3697612a-1e88-4f6e-93e3-e651e9866bb7)
+<br> <!-- A plot with the robot’s position and targets’ positions  -->
+3- A plot with the robot’s position and targets’ positions:
+<br> <!--  -->
+![image](https://github.com/ehsan51/RT2_assignment/assets/52650110/97d1b45e-74e2-4e21-bba1-6f831d5455da)
+<br> <!-- A text box with the distance of the closest obstacle -->
+4-  A text box with the distance of the closest obstacle:
+<br> <!--  -->
+![image](https://github.com/ehsan51/RT2_assignment/assets/52650110/f15cb505-438b-448b-91d1-c3517138ab1e)
+<br> <!--  -->
+<br> <!--  A plot for the number of reached/not-reached targets: -->
+5-  A plot for the number of reached/not-reached targets:
 
+![image](https://github.com/ehsan51/RT2_assignment/assets/52650110/ce3ec1c7-3cf2-45e5-a597-05964f53cd7f)
+<br> <!--  -->
 # 3- Third directory
 ## Statistical Analysis Report
 
@@ -119,6 +141,5 @@ The success/failure rates analysis section focuses on comparing the performance 
 ### Conclusion
 
 The conclusion section summarizes the main findings and conclusions drawn from the analysis. It highlights the contrasting performance of the "Amir" and "Mine" approaches in terms of time efficiency while addressing the lack of substantial variation in success rates.
-
 
 
